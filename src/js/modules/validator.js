@@ -6,20 +6,20 @@ export default class Validator {
     if (!name) {
       return false;
     }
-
     /*
       валидация на отсутствие цифр, "_" и "-" в начале строки;
       валидация на содержание только латиницы, "_" и "-";
       валидация на отсутствие цифр, "_" и "-" в конце строки.
-    */
-    const conditionOne = /^[^\d_-][\w-]*[^\d_-]$/.test(name);
-
-    /*
       валидация на количество символов от 4 и выше
     */
-    const conditionTwo = /\d{4,}/.test(name);
+    const exceptThreeNumbersInRow = /\d{4}/.test(name);
+    const dashAccept = /^[\w-]+$/.test(name);
+    const noDashOrUnderscoreInBeginningOrEnd = /^[a-zA-Z][\w-]*[a-zA-Z\d]$/.test(name);
+    // const conditionOne = /^[^\d_-][\w-]*[^\d_-]$/.test(name);
+    // const conditionTwo = /\d{4,}/.test(name);
 
-    return conditionOne && !conditionTwo;
+    // return conditionOne && !conditionTwo;
+    return !exceptThreeNumbersInRow && dashAccept && noDashOrUnderscoreInBeginningOrEnd;
   }
 
   /*
